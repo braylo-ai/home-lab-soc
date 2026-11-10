@@ -1,0 +1,22 @@
+id: win_lsass_dump
+title: LSASS Memory Dump
+level: critical
+description: Detects tools reading LSASS memory to steal credentials (procdump, comsvcs MiniDump).
+logsource:
+  category: process_creation
+  product: windows
+attack:
+  tactic: Credential Access
+  technique_id: T1003.001
+  technique: LSASS Memory
+detection:
+  selection:
+    EventID: 1
+    CommandLine|contains:
+      - lsass
+  tools:
+    Image|endswith:
+      - \procdump.exe
+      - \procdump64.exe
+      - \rundll32.exe
+  condition: selection and tools

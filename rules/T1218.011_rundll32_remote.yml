@@ -1,0 +1,19 @@
+id: win_rundll32_js
+title: Rundll32 Proxy Execution
+level: high
+description: Detects rundll32 invoking javascript/url protocols for signed-binary proxy execution.
+logsource:
+  category: process_creation
+  product: windows
+attack:
+  tactic: Defense Evasion
+  technique_id: T1218.011
+  technique: Rundll32
+detection:
+  selection:
+    EventID: 1
+    Image|endswith: \rundll32.exe
+    CommandLine|contains:
+      - 'javascript:'
+      - 'url.dll,OpenURL'
+  condition: selection

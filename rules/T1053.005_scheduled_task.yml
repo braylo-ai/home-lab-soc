@@ -1,0 +1,17 @@
+id: win_scheduled_task_create
+title: Scheduled Task Creation
+level: medium
+description: Detects creation of a scheduled task, often used for persistence or lateral execution.
+logsource:
+  category: process_creation
+  product: windows
+attack:
+  tactic: Persistence
+  technique_id: T1053.005
+  technique: Scheduled Task
+detection:
+  selection:
+    EventID: 1
+    Image|endswith: \schtasks.exe
+    CommandLine|contains: /create
+  condition: selection

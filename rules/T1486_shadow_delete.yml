@@ -1,0 +1,17 @@
+id: win_vss_shadow_delete
+title: Volume Shadow Copy Deletion
+level: critical
+description: Detects deletion of volume shadow copies, a common pre-encryption step in ransomware.
+logsource:
+  category: process_creation
+  product: windows
+attack:
+  tactic: Impact
+  technique_id: T1486
+  technique: Data Encrypted for Impact
+detection:
+  selection:
+    EventID: 1
+    Image|endswith: \vssadmin.exe
+    CommandLine|contains: delete shadows
+  condition: selection

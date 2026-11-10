@@ -1,0 +1,17 @@
+id: win_cmd_obfuscation
+title: Suspicious cmd.exe Obfuscation
+level: medium
+description: Detects cmd.exe command lines with caret/env obfuscation patterns.
+logsource:
+  category: process_creation
+  product: windows
+attack:
+  tactic: Execution
+  technique_id: T1059.003
+  technique: Windows Command Shell
+detection:
+  selection:
+    EventID: 1
+    Image|endswith: \cmd.exe
+    CommandLine|re: '\^|%[A-Za-z]+:~'
+  condition: selection

@@ -1,0 +1,19 @@
+id: win_certutil_download
+title: Certutil Ingress Tool Transfer
+level: high
+description: Detects certutil used to download a remote file (living-off-the-land ingress transfer).
+logsource:
+  category: process_creation
+  product: windows
+attack:
+  tactic: Command and Control
+  technique_id: T1105
+  technique: Ingress Tool Transfer
+detection:
+  selection:
+    EventID: 1
+    Image|endswith: \certutil.exe
+    CommandLine|contains:
+      - -urlcache
+      - -split
+  condition: selection

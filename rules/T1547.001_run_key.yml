@@ -1,0 +1,18 @@
+id: win_run_key_persistence
+title: Registry Run Key Persistence
+level: high
+description: Detects reg.exe adding an autorun value under a CurrentVersion\Run key.
+logsource:
+  category: process_creation
+  product: windows
+attack:
+  tactic: Persistence
+  technique_id: T1547.001
+  technique: Registry Run Keys
+detection:
+  selection:
+    EventID: 1
+    Image|endswith: \reg.exe
+    CommandLine|contains:
+      - \CurrentVersion\Run
+  condition: selection

@@ -1,0 +1,90 @@
+{
+  "summary": {
+    "events_total": 580,
+    "malicious_labeled": 180,
+    "malicious_detected": 180,
+    "overall_detection_rate": 1.0,
+    "benign_events": 400,
+    "benign_false_positives": 0,
+    "false_positive_rate": 0.0
+  },
+  "per_rule": {
+    "win_lsass_dump": {
+      "title": "LSASS Memory Dump",
+      "technique_id": "T1003.001",
+      "tactic": "Credential Access",
+      "labeled_events": 20,
+      "detections": 20,
+      "detection_rate": 1.0
+    },
+    "win_scheduled_task_create": {
+      "title": "Scheduled Task Creation",
+      "technique_id": "T1053.005",
+      "tactic": "Persistence",
+      "labeled_events": 20,
+      "detections": 20,
+      "detection_rate": 1.0
+    },
+    "win_powershell_encoded": {
+      "title": "PowerShell Encoded Command",
+      "technique_id": "T1059.001",
+      "tactic": "Execution",
+      "labeled_events": 20,
+      "detections": 20,
+      "detection_rate": 1.0
+    },
+    "win_cmd_obfuscation": {
+      "title": "Suspicious cmd.exe Obfuscation",
+      "technique_id": "T1059.003",
+      "tactic": "Execution",
+      "labeled_events": 20,
+      "detections": 20,
+      "detection_rate": 1.0
+    },
+    "win_certutil_download": {
+      "title": "Certutil Ingress Tool Transfer",
+      "technique_id": "T1105",
+      "tactic": "Command and Control",
+      "labeled_events": 20,
+      "detections": 20,
+      "detection_rate": 1.0
+    },
+    "win_failed_logon": {
+      "title": "Failed Logon (4625)",
+      "technique_id": "T1110",
+      "tactic": "Credential Access",
+      "labeled_events": 20,
+      "detections": 20,
+      "detection_rate": 1.0
+    },
+    "win_rundll32_js": {
+      "title": "Rundll32 Proxy Execution",
+      "technique_id": "T1218.011",
+      "tactic": "Defense Evasion",
+      "labeled_events": 20,
+      "detections": 20,
+      "detection_rate": 1.0
+    },
+    "win_vss_shadow_delete": {
+      "title": "Volume Shadow Copy Deletion",
+      "technique_id": "T1486",
+      "tactic": "Impact",
+      "labeled_events": 20,
+      "detections": 20,
+      "detection_rate": 1.0
+    },
+    "win_run_key_persistence": {
+      "title": "Registry Run Key Persistence",
+      "technique_id": "T1547.001",
+      "tactic": "Persistence",
+      "labeled_events": 20,
+      "detections": 20,
+      "detection_rate": 1.0
+    }
+  },
+  "meta": {
+    "generated_at_utc": "2026-11-10T01:23:28+00:00",
+    "rules": 9,
+    "dataset": "synthetic (seed=1337)"
+  }
+}

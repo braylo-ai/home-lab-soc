@@ -1,0 +1,15 @@
+id: win_failed_logon
+title: Failed Logon (4625)
+level: low
+description: Detects a failed logon event. On its own low signal; aggregation (brute force) is done at reporting time.
+logsource:
+  category: authentication
+  product: windows
+attack:
+  tactic: Credential Access
+  technique_id: T1110
+  technique: Brute Force
+detection:
+  selection:
+    EventID: 4625
+  condition: selection
